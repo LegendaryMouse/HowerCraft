@@ -32,7 +32,7 @@ This Code of Conduct applies to all aspects of our HowerCraft game project commu
 
 ### Enforcement 💪
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to community leaders by emailing [INSERT CONTACT INFORMATION HERE]. All complaints will be reviewed and investigated promptly and fairly. We take all reports seriously and will take appropriate action in response to any behavior that violates our standards.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to community leaders by emailing delcolbas@gmail.com. All complaints will be reviewed and investigated promptly and fairly. We take all reports seriously and will take appropriate action in response to any behavior that violates our standards.
 
 ### Enforcement Guidelines 📋
 
