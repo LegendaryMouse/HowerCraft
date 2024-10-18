@@ -27,7 +27,16 @@ public class CameraMove : MonoBehaviour
         if (Yrot)
             rotY += Input.GetAxis("Mouse Y");
 
-        qtr = new Vector3((-rotY * sensitivity * 0.001f * Screen.width), rotX * sensitivity * 0.001f * Screen.height, 0f);
-        tr.localRotation = Quaternion.Euler(qtr);
+        // Вычисляем желаемое вращение
+    Vector3 targetRotation = new Vector3((-rotY * sensitivity * 0.001f * Screen.width), rotX * sensitivity * 0.001f * Screen.height, 0f);
+    
+    // Ограничиваем угол вращения по оси X
+    targetRotation.x = Mathf.Clamp(targetRotation.x, -25, 25);
+
+    // Преобразуем в кватернион
+    Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
+
+    // Плавно интерполируем текущее вращение к желаемому
+    tr.localRotation = targetQuaternion;
     }
 }
