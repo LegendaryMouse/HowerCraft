@@ -21,7 +21,7 @@ public class EEngine : MonoBehaviour
     {
         hcc.engineForce = originalForce;
 
-        if (Input.GetKey(KeyCode.N))
+        if (Input.GetKey(KeyCode.LeftShift))
             for (int i = 0; i < r.batteryCount.Count; i++)
             {
                 if (r.batteryCount[i].GetComponent<Battery>())

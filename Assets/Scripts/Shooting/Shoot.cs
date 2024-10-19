@@ -66,6 +66,8 @@ public class Shoot : MonoBehaviour
                 reloaded = false;
 
             Invoke("Shoots", startDelay);
+            Invoke("Reload", reloadTime);
+            isReloading = true;
         }
         else
         {

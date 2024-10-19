@@ -31,7 +31,7 @@ public class CameraMove : MonoBehaviour
     Vector3 targetRotation = new Vector3((-rotY * sensitivity * 0.001f * Screen.width), rotX * sensitivity * 0.001f * Screen.height, 0f);
     
     // Ограничиваем угол вращения по оси X
-    targetRotation.x = Mathf.Clamp(targetRotation.x, -25, 25);
+    // targetRotation.x = Mathf.Clamp(targetRotation.x, -25, 25);
 
     // Преобразуем в кватернион
     Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
