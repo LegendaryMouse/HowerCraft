@@ -31,7 +31,9 @@ public class Statistics : MonoBehaviour
         if (coreSpeed)
             coreSpeed.text = "Speed: " + Mathf.Round(rb.velocity.magnitude * 3.6f) + "K/H";
         if (fps)
+        {
             fps.text = "FPS: " + Mathf.Round(1 / Time.deltaTime);
+        }
         if (rb.velocity.magnitude > 200)
         {
             SceneManager.LoadScene(0);

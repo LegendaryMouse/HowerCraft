@@ -78,7 +78,7 @@ public class FunctionsControl : MonoBehaviour
     void GetUp()
     {
         {
-            rb.AddForce(0, rb.mass * 3000, 0);
+            rb.AddForce(0, rb.mass * 1500, 0);
             rb.AddTorque(0, rb.mass * 30000, 0);
         }
     }

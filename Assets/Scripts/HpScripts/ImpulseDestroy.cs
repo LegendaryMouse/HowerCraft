@@ -11,10 +11,6 @@ public class ImpulseDestroy : MonoBehaviour
     void Awake()
     {
         hp = GetComponent<Rigidbody>().mass * 1000;
-        if (GetComponent<Engine>())
-            hp = GetComponent<Rigidbody>().mass * 150;
-        if(GetComponent<Rigidbody>().mass == 150)
-            hp = GetComponent<Rigidbody>().mass * 75;
         if (GetComponent<FunctionsControl>())
             hp = GetComponent<Rigidbody>().mass * 50;
 
@@ -26,8 +22,7 @@ public class ImpulseDestroy : MonoBehaviour
         Vector3 impRaw = other.impulse;
         float imp = Mathf.Clamp(impRaw.magnitude, 0, hp);
 
-        if (imp > 0.005f * hp)
-            hp -= imp;
+        hp -= imp;
     }
 
     void Update()

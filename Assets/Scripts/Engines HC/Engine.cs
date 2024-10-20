@@ -6,7 +6,7 @@ public class Engine : MonoBehaviour
 
     Rigidbody rb;
     Transform tr;
-    AudioSource ass;
+    AudioSource aus;
 
 
     public float y;
@@ -24,7 +24,7 @@ public class Engine : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tr = GetComponent<Transform>();
-        ass = GetComponent<AudioSource>();
+        aus = GetComponent<AudioSource>();
         hcc = core.GetComponent<HCControl>();
     }
 
@@ -32,20 +32,25 @@ public class Engine : MonoBehaviour
     {
         tooHigh = hcc.targetHeight * 10;
 
-        Physics.Raycast(tr.position - (transform.up * 0.5f), -transform.up, out ray);
-        y = ray.distance;
+        if (Physics.Raycast(tr.position - (transform.up * 0.5f), -transform.up, out ray))
+        {
+            y = ray.distance;
+        }
+        else
+        {
+            y = tooHigh; // No hit, assume too high
+        }
 
-        if (y == 0f)
-            y = tooHigh;
+        divePercent = (hcc.targetHeight - y + tr.localScale.y) / hcc.targetHeight; // Added engine scale to make dive percent more accurate
+        divePercentNormalized = Mathf.Clamp01(divePercent);
 
-        divePercent = -y + hcc.targetHeight - tr.localScale.x * 0.5f;
-        divePercentNormalized = Mathf.Clamp(divePercent, 0, 1);
+        float smoothingFactor = 5f; // Adjust to tweak responsiveness
+        rb.drag = Mathf.Lerp(rb.drag, divePercentNormalized, Time.deltaTime * smoothingFactor);
+        rb.angularDrag = Mathf.Lerp(rb.angularDrag, divePercentNormalized, Time.deltaTime * smoothingFactor);
 
-        rb.drag = divePercentNormalized;
-        rb.angularDrag = divePercentNormalized;
+        rb.AddForce(10 * Mathf.Pow(divePercentNormalized, 2) * hcc.engineForce * transform.up);
 
-        rb.AddForce(10 * divePercentNormalized * hcc.engineForce * transform.up);
-
-        ass.volume = rb.velocity.magnitude / 90;
+        aus.volume = Mathf.Lerp(aus.volume, rb.velocity.magnitude / 90, Time.deltaTime * smoothingFactor);
+        aus.pitch = Mathf.Lerp(aus.pitch, rb.velocity.magnitude / 90, Time.deltaTime * smoothingFactor);
     }
 }

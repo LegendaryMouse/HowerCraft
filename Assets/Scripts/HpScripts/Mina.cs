@@ -8,6 +8,8 @@ public class Mina : MonoBehaviour
     Rigidbody rb;
     Renderer rend;
 
+    public float timer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,7 +24,7 @@ public class Mina : MonoBehaviour
                 if (notExploded)
                 {
                     beep.Play();
-                    Invoke(nameof(Counter), 2f);
+                    Invoke(nameof(Counter), timer);
                     rend.material.color = Color.red; 
                     notExploded = false;
                 }

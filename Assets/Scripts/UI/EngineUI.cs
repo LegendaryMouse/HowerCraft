@@ -9,10 +9,12 @@ public class EngineUI : MonoBehaviour
     float hpr;
     Image img;
     ImpulseDestroy impDes;
+    RectTransform tr;
 
     private void Awake()
     {
         img = GetComponent<Image>();
+        tr = GetComponent<RectTransform>();
         impDes = engine.GetComponent<ImpulseDestroy>();
     }
     void Update()
@@ -23,10 +25,12 @@ public class EngineUI : MonoBehaviour
         {
             hpr = impDes.hpRemain;
             Col = new Color(1 - hpr, hpr, 0f, 1f);
+            img.rectTransform.localScale = new Vector3(1, hpr, 1);
         }
         else
         {
-            Col = new Color(0, 0, 0, 0.8f);
+            Debug.Log("Destroyed");
+            img.rectTransform.localScale = new Vector3(1, 0, 1);
         }
     }
 }

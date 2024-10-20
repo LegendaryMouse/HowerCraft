@@ -3,7 +3,6 @@ using UnityEngine;
 public class Colorful : MonoBehaviour
 {
     bool On;
-    bool ful = true;
     Color Col;
 
     float hpr;
@@ -15,25 +14,31 @@ public class Colorful : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         imp = GetComponent<ImpulseDestroy>();
+        Col = Color.white;
+        rend.material.color = Col;
     }
     void Update()
     {
-        rend.material.color = Col;
+        
 
-        On = Input.GetKeyDown(KeyCode.C);
-
-        if (On)
-            ful = !ful;
-
-        if (GetComponent<ImpulseDestroy>())
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            hpr = imp.hpRemain;
-            Col = new Color(1 - hpr, hpr, 0, 1);
+            if (GetComponent<ImpulseDestroy>())
+            {
+                hpr = imp.hpRemain;
+                Col = new Color(1 - hpr, hpr, 0, 1);
+                rend.material.color = Col;
+            }
+            else
+            {
+                Col = new Color(0, 0, 0, 1);
+                rend.material.color = Col;
+            } 
         }
-        else
-            Col = new Color(0, 0, 0, 1);
-
-        if (ful)
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
             Col = Color.white;
+            rend.material.color = Col;
+        }
     }
 }
